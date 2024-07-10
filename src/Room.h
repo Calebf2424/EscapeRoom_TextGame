@@ -26,13 +26,5 @@ class Room {
     bool canExit;
 };
 
-class Cell : public Room {
-    void roomDescription() const override;
-    void showPlayerOptions() override;
-    
-};
-
-
-
 
 #endif //ROOM_H
