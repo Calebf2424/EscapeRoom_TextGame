@@ -7,10 +7,9 @@
 #include <iostream>
 #include <string>
 
-
 class Room {
  public:
-    Room(const std::string& description, bool canExit = false);
+    Room(const std::string& description, bool canExit);
     Room::~Room();
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
