@@ -11,6 +11,7 @@
 class Room {
  public:
     Room(const std::string& description, bool canExit = false);
+    Room::~Room();
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
     virtual void actions() = 0;
