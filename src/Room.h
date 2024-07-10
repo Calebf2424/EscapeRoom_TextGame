@@ -14,8 +14,8 @@ class Room {
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
     virtual void actions() = 0;
-    void showInventory(std::vector<Item*> items);
-    void addToInventory(std::vector<Item*> items, Item* item);
+    void showInventory(std::vector<Item*>& items);
+    void addToInventory(std::vector<Item*>& items, Item* item);
     int playerChoice(int choice);
     void unlockExit();
  
