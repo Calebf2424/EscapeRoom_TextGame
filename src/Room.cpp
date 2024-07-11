@@ -13,7 +13,7 @@ Room::~Room {
 
 void Room::showInventory(std::vector<Item*>& _items) {
     for (auto item : _items) {
-        std::cout << "name: " << item.name <<  "description: " << item.desc << std::endl
+        std::cout << "name: " << item.name <<  "description: " << item.desc << std::endl;
     }
 }
 
