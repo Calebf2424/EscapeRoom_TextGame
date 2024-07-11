@@ -14,6 +14,8 @@ add_executable(EscapeRoom_TextGame
     src/main.cpp
     src/Room.h
     src/Room.cpp
+    src/Item.h
+    src/Item.cpp
 )
 
 # Optionally, set build type (Debug or Release)
