@@ -9,8 +9,8 @@
 
 class Room {
  public:
-    Room(const std::string& _description, bool _canExit);
-    Room::~Room();
+    Room(const std::string& description, bool canExit = false);
+    ~Room();
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
     virtual void actions() = 0;

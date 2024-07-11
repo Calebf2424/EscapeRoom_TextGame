@@ -1,11 +1,10 @@
 #include "Room.h"
 #include <limits>
 
-Room::Room(const std::string _description, bool canExit) : _description(description), _canExit(canExit){
-    _canExit = false;
-}
+Room::Room(const std::string& description, bool canExit)
+    : _description(description), _canExit(canExit) {}
 
-Room::~Room {
+Room::~Room() {
     for (auto item : _items) {
         delete item;
     }
@@ -13,7 +12,7 @@ Room::~Room {
 
 void Room::showInventory(std::vector<Item*>& _items) {
     for (auto item : _items) {
-        std::cout << "name: " << item.name <<  "description: " << item.desc << std::endl;
+        std::cout << "name: " << item->getName() <<  "description: " << item->getDescription() << std::endl;
     }
 }
 

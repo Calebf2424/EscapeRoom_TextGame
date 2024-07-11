@@ -1,5 +1,6 @@
 //headers
-
+#include "Item.h"
+#include "Room.h"
 //libraries
 #include <iostream>
 #include <vector>
