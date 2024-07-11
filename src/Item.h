@@ -5,9 +5,9 @@
 
 class Item {
 public:
-    Item(std::string& _name, std::string& _description);
-    std::string getName();
-    std::string getDescription();
+    Item(const std::string& _name, const std::string& _description);
+    std::string getName() const;
+    std::string getDescription() const;
 
 private:
     std::string _name;
