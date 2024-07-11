@@ -1,4 +1,5 @@
 #include "Room.h"
+#include "Item.h"
 #include <limits>
 
 Room::Room(const std::string& description, bool canExit)
