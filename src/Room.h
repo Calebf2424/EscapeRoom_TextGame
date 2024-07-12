@@ -27,4 +27,20 @@ class Room {
 };
 
 
+
+
+
+
+
+
+class Game {
+ public:
+   void start();
+   void end();
+   void move();
+
+ private:
+   bool _haswon
+};
+
 #endif //ROOM_H
