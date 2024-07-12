@@ -40,7 +40,7 @@ class Game {
    void move();
 
  private:
-   bool _haswon
+   bool _haswon;
 };
 
 #endif //ROOM_H
