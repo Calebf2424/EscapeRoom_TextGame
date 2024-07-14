@@ -27,6 +27,17 @@ class Room {
 };
 
 
+class Cell : public Room {
+ public:
+   void roomDescription() const override;
+   void showPlayerOptions() override;
+   void actions() override;
+
+
+ protected:
+   int lockKey;
+};
+
 
 
 
@@ -40,7 +51,7 @@ class Game {
    void move();
 
  private:
-   bool _haswon;
+   bool _hasWon;
 };
 
 #endif //ROOM_H
