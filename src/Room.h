@@ -41,7 +41,6 @@ class Game {
 public:
     virtual void start();
     virtual void end();
-    virtual void move();
     virtual ~Game() = default;
 
 protected:
