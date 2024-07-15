@@ -18,12 +18,12 @@ public:
     void addToInventory(std::vector<Item*>& _items, Item* item);
     int playerChoice(int min, int max);
     void unlockExit();
+    bool _canExit;
 
 protected:
     std::string _description;
     std::vector<Item*> _items;
     int _choice;
-    bool _canExit;
 };
 
 class Cell : public Room {
