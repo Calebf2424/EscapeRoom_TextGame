@@ -1,19 +1,13 @@
 #include "Room.h"
-#include "Item.h"
-#include <limits>
 
-Room::Room(const std::string& description, bool canExit)
-    : _description(description), _canExit(canExit) {}
-
-Room::~Room() {
-    for (auto item : _items) {
-        delete item;
-    }
-}
+// Room class implementations
+Room::Room(const std::string& description, bool canExit) : _description(description), _canExit(canExit) {}
+Room::~Room() {}
 
 void Room::showInventory(std::vector<Item*>& _items) {
-    for (auto item : _items) {
-        std::cout << "name: " << item->getName() <<  "description: " << item->getDescription() << std::endl;
+    std::cout << "Inventory:" << std::endl;
+    for (const auto& item : _items) {
+        std::cout << "- " << item->getName() << std::endl;
     }
 }
 
@@ -22,22 +16,106 @@ void Room::addToInventory(std::vector<Item*>& _items, Item* item) {
 }
 
 int Room::playerChoice(int min, int max) {
-    int input;
-    while (true) {
-        std::cout << "Enter a number for action: ";
-        std::cin >> input;
-
-        if (std::cin.fail() || input < min || input > max) {
-            std::cin.clear(); // Clear the error state
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the invalid input
-            std::cout << "Invalid input. Please try again." << std::endl;
-        } else {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard any extra input
-            return input;
-        }
-    }
+    int choice;
+    do {
+        std::cout << "Enter your choice (" << min << "-" << max << "): ";
+        std::cin >> choice;
+    } while (choice < min || choice > max);
+    return choice;
 }
 
 void Room::unlockExit() {
-    _canExit = true; 
+    _canExit = true;
 }
+
+// Cell class implementations
+Cell::Cell(const std::string& description, int lockKey) : Room(description), _lockKey(lockKey) {}
+
+void Cell::roomDescription() const {
+    std::cout << _description << std::endl;
+}
+
+void Cell::showPlayerOptions() {
+    std::cout << "Make your choice to explore:" << std::endl;
+    std::cout << "1. Show inventory "<< std::endl;
+    std::cout << "2. " << std::endl;
+    std::cout << "3. " << std::endl;
+    std::cout << "4. " << std::endl;
+    std::cout << "5. " << std::endl;
+}
+
+void Cell::actions() {
+    int choice = playerChoice(1, 6);
+    switch (choice) {
+        case 1:
+            showInventory(_items);
+            break;
+        case 2:
+        //choice 2 code;
+            break;
+        case 3:
+            break;
+        //choice 3 code;
+        case 4:
+        //choice 4 code;
+            break;
+        case 5:
+        //choice 5 code;
+            break;
+        case 6:
+            int attempt;
+            std::cout << "Enter the key to unlock: ";
+            std::cin >> attempt;
+            if (attempt == _lockKey) {
+                unlockExit();
+                std::cout << "Unlocked!" << std::endl;
+            } else {
+                std::cout << "Incorrect key!" << std::endl;
+            }
+            break;
+    }
+}
+
+// Game class implementations
+void Game::start() {
+    _hasWon = false;
+    std::cout << "Game started!" << std::endl;
+}
+
+void Game::end() {
+    _hasWon = true;
+    std::cout << "Game ended!" << std::endl;
+}
+
+void Game::move() {
+    // To be implemented
+}
+
+// RunRoom class implementations
+void RunRoom::addRoom(Room* room) {
+    Node* newNode = new Node(room);
+    if (!head) {
+        head = newNode;
+        current = head;
+    } else {
+        Node* temp = head;
+        while (temp->next) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+void RunRoom::start() {
+    Game::start();
+    current = head;
+    while (current && !_hasWon) {
+        move();
+        if (current->room->_canExit) {
+            current = current->next;
+        }
+    }
+    Game::end();
+}
+
+
