@@ -48,7 +48,7 @@ void Cell::actions() {
     int choice = playerChoice(1, 6);
     switch (choice) {
         case 1:
-            showInventory(_items);
+            showInventory();
             break;
         case 2:
         //choice 2 code;
