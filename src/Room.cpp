@@ -4,14 +4,14 @@
 Room::Room(const std::string& description, bool canExit) : _description(description), _canExit(canExit) {}
 Room::~Room() {}
 
-void Room::showInventory(std::vector<Item*>& _items) {
+void Room::showInventory() {
     std::cout << "Inventory:" << std::endl;
     for (const auto& item : _items) {
-        std::cout << "- " << item->getName() << std::endl;
+        std::cout << "- " << item->getName() << item->getDescription() << std::endl;
     }
 }
 
-void Room::addToInventory(std::vector<Item*>& _items, Item* item) {
+void Room::addToInventory(Item* item) {
     _items.push_back(item);
 }
 
