@@ -8,9 +8,9 @@
 #include <string>
 
 class Room {
- public:
+public:
     Room(const std::string& description, bool canExit = false);
-    ~Room();
+    virtual ~Room();
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
     virtual void actions() = 0;
@@ -18,40 +18,51 @@ class Room {
     void addToInventory(std::vector<Item*>& _items, Item* item);
     int playerChoice(int min, int max);
     void unlockExit();
- 
- protected:
+
+protected:
     std::string _description;
     std::vector<Item*> _items;
     int _choice;
     bool _canExit;
 };
 
-
 class Cell : public Room {
- public:
-   void roomDescription() const override;
-   void showPlayerOptions() override;
-   void actions() override;
+public:
+    Cell(const std::string& description, int lockKey);
+    void roomDescription() const override;
+    void showPlayerOptions() override;
+    void actions() override;
 
-
- protected:
-   int lockKey;
+private:
+    int _lockKey;
 };
-
-
-
-
-
-
 
 class Game {
- public:
-   void start();
-   void end();
-   void move();
+public:
+    virtual void start();
+    virtual void end();
+    virtual void move();
+    virtual ~Game() = default;
 
- private:
-   bool _hasWon;
+protected:
+    bool _hasWon;
 };
 
-#endif //ROOM_H
+class RunRoom : public Game {
+public:
+    void addRoom(Room* room);
+    void start() override;
+    void move() override;
+
+private:
+    struct Node {
+        Room* room;
+        Node* next;
+        Node(Room* r) : room(r), next(nullptr) {}
+    };
+
+    Node* head = nullptr;
+    Node* current = nullptr;
+};
+
+#endif // ROOM_H
