@@ -118,4 +118,9 @@ void RunRoom::start() {
     Game::end();
 }
 
-
+void RunRoom::move() {
+    if (current) {
+        current->room->showPlayerOptions();
+        current->room->actions();
+    }
+}
