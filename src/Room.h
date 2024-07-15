@@ -51,7 +51,7 @@ class RunRoom : public Game {
 public:
     void addRoom(Room* room);
     void start() override;
-    void move() override;
+    void move();
 
 private:
     struct Node {
