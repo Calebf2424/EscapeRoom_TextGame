@@ -87,10 +87,6 @@ void Game::end() {
     std::cout << "Game ended!" << std::endl;
 }
 
-void Game::move() {
-    // To be implemented
-}
-
 // RunRoom class implementations
 void RunRoom::addRoom(Room* room) {
     Node* newNode = new Node(room);
