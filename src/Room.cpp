@@ -6,6 +6,9 @@ Room::~Room() {}
 
 void Room::showInventory() {
     std::cout << "Inventory:" << std::endl;
+    if (_items.empty()) {
+      std::cout << "Inventory is empty" << std::endl;
+    }
     for (const auto& item : _items) {
         std::cout << "- " << item->getName() << item->getDescription() << std::endl;
     }
@@ -37,32 +40,29 @@ void Cell::roomDescription() const {
 
 void Cell::showPlayerOptions() {
     std::cout << "Make your choice to explore:" << std::endl;
-    std::cout << "1. Show inventory "<< std::endl;
-    std::cout << "2. " << std::endl;
-    std::cout << "3. " << std::endl;
-    std::cout << "4. " << std::endl;
-    std::cout << "5. " << std::endl;
+    std::cout << "1. Show inventory-"<< std::endl;
+    std::cout << "2. Inspect Rock on ground:" << std::endl;
+    std::cout << "3.  Talk to old man sitting in the corner" << std::endl;
+    std::cout << "4. Check clock" << std::endl;
+    std::cout << "5. Attempt to unlock lock on door- " << std::endl;
 }
 
 void Cell::actions() {
-    int choice = playerChoice(1, 6);
+    int choice = playerChoice(1, 4);
     switch (choice) {
         case 1:
             showInventory();
             break;
         case 2:
-        //choice 2 code;
+            "The rock appears to be stuck to the ground, you notice the numbers 123 scratched in" << std::endl;
             break;
         case 3:
+            "The old man stares blankly at you" << std::endl;
             break;
-        //choice 3 code;
         case 4:
-        //choice 4 code;
+            "The clock appears to have froze on 4am" << std::endl;
             break;
         case 5:
-        //choice 5 code;
-            break;
-        case 6:
             int attempt;
             std::cout << "Enter the key to unlock: ";
             std::cin >> attempt;
