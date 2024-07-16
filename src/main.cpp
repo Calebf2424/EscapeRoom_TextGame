@@ -10,7 +10,6 @@ int main() {
     // Create RunRoom object and add rooms
     RunRoom game;
     game.addRoom(cell1);
-    game.addRoom(cell2);
 
     // Start the game
     game.start();
