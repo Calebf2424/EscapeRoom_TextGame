@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#inlcude <iostream>
+#include <iostream>
 
 class Room {
 public:
