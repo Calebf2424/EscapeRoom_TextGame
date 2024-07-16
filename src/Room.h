@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <iostream>
+#include <cctype>
 
 class Room {
 public:
@@ -54,11 +55,11 @@ public:
 //third stage
 
 class Cave : public Room {
-    Cave(const std::string& description);
+    Hallway(const std::string& description);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
-};
+}
 
 
 class Game {
