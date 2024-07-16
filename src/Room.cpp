@@ -111,7 +111,7 @@ void Hallway::actions() {
             std::string attempt;
             std::cout << "Enter the the passphrase to whisper to the troll";
             std::cin >> attempt;
-            if (attempt == tolower(_passPhrase)) {
+            if (attempt == _passPhrase) {
                 unlockExit();
                 std::cout << "The troll lets you out!" << std::endl;
             } else {
