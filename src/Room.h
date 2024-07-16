@@ -59,7 +59,7 @@ class Cave : public Room {
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
-}
+};
 
 
 class Game {
