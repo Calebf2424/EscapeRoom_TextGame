@@ -55,7 +55,7 @@ public:
 //third stage
 
 class Cave : public Room {
-    Hallway(const std::string& description);
+    Cave(const std::string& description);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
