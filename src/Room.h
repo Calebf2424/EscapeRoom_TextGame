@@ -27,6 +27,7 @@ protected:
     int _choice;
 };
 
+//first stage
 class Cell : public Room {
 public:
     Cell(const std::string& description, int lockKey);
@@ -37,6 +38,28 @@ public:
 private:
     int _lockKey;
 };
+
+//second stage
+class Hallway : public Room {
+public:
+    Hallway(const std::string& description, std::string passPhrase);
+    void roomDescription() const override;
+    void showPlayerOptions() override;
+    void actions() override;
+
+    private:
+     std::string _passPhrase;
+};
+
+//third stage
+
+class Cave : public Room {
+    Hallway(const std::string& description);
+    void roomDescription() const override;
+    void showPlayerOptions() override;
+    void actions() override;
+}
+
 
 class Game {
 public:
