@@ -48,7 +48,7 @@ void Cell::showPlayerOptions() {
 }
 
 void Cell::actions() {
-    int choice = playerChoice(1, 4);
+    int choice = playerChoice(1, 5);
     switch (choice) {
         case 1:
             showInventory();
@@ -75,6 +75,92 @@ void Cell::actions() {
             break;
     }
 }
+
+//Hallway class implementations
+Hallway::Hallway(const std::string& description, std::string passPhrase) : Room(description), _passPhrase(passPhrase) {}
+
+void Hallway::roomDescription() const {
+    std::cout << _description << std::endl;
+}
+
+void Hallway::showPlayerOptions() {
+    std::cout << "desc" << std::endl;
+    std::cout << "1." << std::endl;
+    std::cout << "2." << std::endl;
+    std::cout << "3." << std::endl;
+    std::cout << "4." << std::endl;
+    std::cout << "5." << std::endl;
+}
+
+void Hallway::actions() {
+    int choice = playerChoice(1, 5);
+    switch (choice) {
+        case 1:
+            showInventory();
+            break;
+        case 2:
+            std::cout << " " << std::endl;
+            break;
+        case 3:
+            std::cout << " " << std::endl;
+            break;
+        case 4:
+            std::cout << " " << std::endl;
+            break;
+        case 5:
+            std::string attempt;
+            std::cout << "Enter the the passphrase to whisper to the troll";
+            std::cin >> attempt;
+            if (attempt == tolower(_passPhrase)) {
+                unlockExit();
+                std::cout << "The troll lets you out!" << std::endl;
+            } else {
+                std::cout << "The troll stands there silently...." << std::endl;
+            }
+            break;
+    }
+}
+
+//Cave implementations
+
+Cave::Cave(const std::string& description) : Room(description) {}
+
+void Cave::roomDescription() const {
+    std::cout << _description << std::endl;
+}
+
+void Cave::showPlayerOptions() {
+    std::cout << "desc" << std::endl;
+    std::cout << "1." << std::endl;
+    std::cout << "2." << std::endl;
+    std::cout << "3." << std::endl;
+    std::cout << "4." << std::endl;
+    std::cout << "5." << std::endl;
+}
+
+void Cave::actions() {
+    int choice = playerChoice(1, 5);
+    switch (choice) {
+        case 1:
+            showInventory();
+            break;
+        case 2:
+            std::cout << " " << std::endl;
+            break;
+        case 3:
+            std::cout << " " << std::endl;
+            break;
+        case 4:
+            std::cout << " " << std::endl;
+            break;
+        case 5:
+            //checks if player has found the key and lets out if yes otherwise doesn't
+            break;
+    }
+}
+
+
+
 
 // Game class implementations
 void Game::start() {
