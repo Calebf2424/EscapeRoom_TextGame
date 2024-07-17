@@ -12,7 +12,7 @@
 
 class Room {
 public:
-    Room(const std::string& description, bool canExit = false);
+    Room(const std::string& description, bool canExit = false, bool lose = false);
     virtual ~Room();
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
@@ -22,11 +22,13 @@ public:
     int playerChoice(int min, int max);
     void unlockExit();
     bool _canExit;
+    bool lose;
 
 protected:
     std::string _description;
     std::vector<Item*> _items;
     int _choice;
+    
 };
 
 //first stage
