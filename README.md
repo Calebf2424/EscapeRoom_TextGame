@@ -19,6 +19,6 @@ This is a text-based escape room game implemented in C++. The game demonstrates 
 1. Clone the repository:
    git clone https://github.com/Calebf2424/escape-room-text-game.git
 2. Ensure CMAKE is installed
-3. Run BuildProject.bat
+3. Run BuildProject.bat and enter filepath you saved the project in
    "BuildProjectCurrent.bat" to update the game to latest version before running
    "BuildProject.bat" for current version stored locally
