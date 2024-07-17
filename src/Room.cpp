@@ -84,12 +84,12 @@ void Hallway::roomDescription() const {
 }
 
 void Hallway::showPlayerOptions() {
-    std::cout << "desc" << std::endl;
-    std::cout << "1." << std::endl;
-    std::cout << "2." << std::endl;
-    std::cout << "3." << std::endl;
-    std::cout << "4." << std::endl;
-    std::cout << "5." << std::endl;
+    std::cout << "Choose what you want to do: " << std::endl;
+    std::cout << "1. Show Inventory: " << std::endl;
+    std::cout << "2. Check words scratched on wall: " << std::endl;
+    std::cout << "3. Check stone on ground: " << std::endl;
+    std::cout << "4. Talk to rat in the corner: " << std::endl;
+    std::cout << "5. Try guessing password" << std::endl;
 }
 
 void Hallway::actions() {
@@ -109,13 +109,20 @@ void Hallway::actions() {
             break;
         case 5:
             std::string attempt;
-            std::cout << "Enter the the passphrase to whisper to the troll";
+            std::cout << "Choose the passphrase to whisper in speaker";
             std::cin >> attempt;
             if (attempt == _passPhrase) {
                 unlockExit();
-                std::cout << "The troll lets you out!" << std::endl;
-            } else {
-                std::cout << "The troll stands there silently...." << std::endl;
+                std::cout << "The light flashes green and the door unlocks!" << std::endl;
+            } 
+            else if(_numGuesses >= 3) {
+                std::cout << "An alarm starts flashing above your head and you hear the sound of guards coming to get you.." << std::endl;
+                //to be implemented
+                //loseGame();
+                //
+            }else {
+                std::cout << "The light flashes red a few times....it didn't appear to set off any alarms" << std::endl;
+                _numGuesses++;
             }
             break;
     }
@@ -155,12 +162,10 @@ void Cave::actions() {
             break;
         case 5:
             //checks if player has found the key and lets out if yes otherwise doesn't
+            
             break;
     }
 }
-
-
-
 
 // Game class implementations
 void Game::start() {
