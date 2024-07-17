@@ -42,14 +42,15 @@ private:
 
 //second stage
 class Hallway : public Room {
-public:
+ public:
     Hallway(const std::string& description, std::string passPhrase);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
 
-    private:
-     std::string _passPhrase;
+ private:
+    std::string _passPhrase;
+    int _numGuesses = 0;
 };
 
 //third stage
