@@ -56,6 +56,7 @@ private:
 class Cave : public Room {
 public:
     Cave(const std::string& description, bool canExit = false, bool lose = false);
+    ~Cave();
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
