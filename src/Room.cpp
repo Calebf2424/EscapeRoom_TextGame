@@ -23,6 +23,7 @@ void Room::addToInventory(Item* item) {
 int Room::playerChoice(int min, int max) {
     int choice;
     do {
+        std::cout << "Enter your choice (" << min << "-" << max << "): ";
         std::cin >> choice;
     } while (choice < min || choice > max);
     return choice;
@@ -208,8 +209,8 @@ void RunRoom::start() {
     current = head;
     while (current) {
         move();
-        if (lose) break;
-        if (current->room->_canExit) {
+        if (current->room->lose) break; // Access lose variable correctly
+        if (current->room->_canExit) {  // Access _canExit through the room pointer
             if (!current->next) {
                 _hasWon = true;
                 break;
