@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <cctype>
+#include <algorithm>
 
 class Room {
 public:
