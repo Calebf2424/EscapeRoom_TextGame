@@ -58,7 +58,7 @@ class Hallway : public Room {
 
 class Cave : public Room {
  public:
-    Cave(const std::string& description, Item* key);
+    Cave(const std::string& description);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
