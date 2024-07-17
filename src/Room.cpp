@@ -99,13 +99,13 @@ void Hallway::actions() {
             showInventory();
             break;
         case 2:
-            std::cout << " " << std::endl;
+            std::cout << "You see scratched into the wall \"phrase\" " << std::endl;
             break;
         case 3:
-            std::cout << " " << std::endl;
+            std::cout << "You see a small note under the rock that says: \"note\" " << std::endl;
             break;
         case 4:
-            std::cout << " " << std::endl;
+            std::cout << "The rat stares at you and moves his tail a bit, why am I talking to a rat you think to yourself " << std::endl;
             break;
         case 5:
             std::string attempt;
