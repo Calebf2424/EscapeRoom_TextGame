@@ -1,7 +1,7 @@
 #include "Room.h"
 
 // Room class implementations
-Room::Room(const std::string& description, bool canExit) : _description(description), _canExit(canExit) {}
+Room::Room(const std::string& description, bool canExit) : _description(description), _canExit(canExit), lose(lose) {}
 Room::~Room() {}
 
 void Room::showInventory() {
