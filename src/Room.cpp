@@ -130,7 +130,7 @@ void Hallway::actions() {
 
 //Cave implementations
 
-Cave::Cave(const std::string& description, Item* _key) : Room(description), _key(key) {}
+Cave::Cave(const std::string& description, Item* _key) : Room(description), Item(key) {}
 
 void Cave::roomDescription() const {
     std::cout << _description << std::endl;
