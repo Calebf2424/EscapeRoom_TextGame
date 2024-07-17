@@ -57,10 +57,13 @@ class Hallway : public Room {
 //third stage
 
 class Cave : public Room {
+ public:
     Cave(const std::string& description, Item* key);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
+ private:
+  Item* _key;
 };
 
 
@@ -72,7 +75,6 @@ public:
 
 protected:
     bool _hasWon;
-    Item* _key;
 };
 
 class RunRoom : public Game {
