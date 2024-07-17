@@ -103,18 +103,19 @@ void Hallway::actions() {
             showInventory();
             break;
         case 2:
-            std::cout << "You see scratched into the wall: \"phrase\"" << std::endl;
+            std::cout << "You see scratched into the wall a curving line" << std::endl;
             break;
         case 3:
-            std::cout << "You see a small note under the rock that says: \"note\"" << std::endl;
+            std::cout << "You see a small note under the rock that says: \"remember to always wag with joy\"" << std::endl;
             break;
         case 4:
-            std::cout << "The rat stares at you and moves its tail a bit. Why am I talking to a rat?" << std::endl;
+            std::cout << "The rat stares at you and moves its tail a bit." << std::endl;
             break;
         case 5:
             std::string attempt;
-            std::cout << "Choose the passphrase to whisper in the speaker: ";
+            std::cout << "Choose the passphrase to whisper in the speaker: (type all leters in lower case and ensure no extra spaces) "; //will add function to do this later, toLower, ignore extra spaces by using 2 pointer
             std::cin >> attempt;
+
             if (attempt == _passPhrase) {
                 unlockExit();
                 std::cout << "The light flashes green and the door unlocks!" << std::endl;
