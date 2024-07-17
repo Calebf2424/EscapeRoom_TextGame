@@ -117,9 +117,7 @@ void Hallway::actions() {
             } 
             else if(_numGuesses >= 3) {
                 std::cout << "An alarm starts flashing above your head and you hear the sound of guards coming to get you.." << std::endl;
-                //to be implemented
-                //loseGame();
-                //
+                lose = true;
             }else {
                 std::cout << "The light flashes red a few times....it didn't appear to set off any alarms" << std::endl;
                 _numGuesses++;
@@ -139,7 +137,7 @@ void Cave::roomDescription() const {
 void Cave::showPlayerOptions() {
     std::cout << "Choose what to do in cave: " << std::endl;
     std::cout << "1.Show inventory: " << std::endl;
-    std::cout << "2.Jump in the pool: " << std::endl;
+    std::cout << "2.Go in the pool of water: " << std::endl;
     std::cout << "3.Walk down dark path: " << std::endl;
     std::cout << "4.Feel along wall" << std::endl;
 }
@@ -151,7 +149,8 @@ void Cave::actions() {
             showInventory();
             break;
         case 2:
-            std::cout << " " << std::endl;
+            std::cout << "You go to search if there's anything in the water and all the sudden you are trapped... " << std::endl;
+            lose = true;
             break;
         case 3:
             if(_items.empty()) {
@@ -162,7 +161,7 @@ void Cave::actions() {
                 std::cout << "You walk down the path again... there doesn't appear to be anything else here." << std::endl;
             }
             break;
-        case 5:
+        case 4:
             if (_items.empty()) {
                 std::cout << "You notice a keyhole on the wall, this could be your way out" << std::endl;
             } else {
@@ -180,8 +179,11 @@ void Game::start() {
 }
 
 void Game::end() {
-    _hasWon = true;
-    std::cout << "Game ended!" << std::endl;
+    if(_hasWon == true) {
+        std::cout << "You escaped to freedom!" << std::endl;
+    }else {
+        std::cout << "You failed to escape!" << std::endl;
+    }
 }
 
 // RunRoom class implementations
@@ -202,9 +204,14 @@ void RunRoom::addRoom(Room* room) {
 void RunRoom::start() {
     Game::start();
     current = head;
-    while (current && !_hasWon) {
+    while (current) {
         move();
+        if (lose == true) break;
         if (current->room->_canExit) {
+            if(!current->next) {
+                _hasWon = true;
+                break;
+            }
             current = current->next;
         }
     }
