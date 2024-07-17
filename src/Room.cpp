@@ -1,16 +1,18 @@
 #include "Room.h"
 
 // Room class implementations
-Room::Room(const std::string& description, bool canExit) : _description(description), _canExit(canExit), lose(lose) {}
+Room::Room(const std::string& description, bool canExit, bool lose)
+    : _description(description), _canExit(canExit), lose(lose) {}
+
 Room::~Room() {}
 
 void Room::showInventory() {
     std::cout << "Inventory:" << std::endl;
     if (_items.empty()) {
-      std::cout << "Inventory is empty" << std::endl;
+        std::cout << "Inventory is empty" << std::endl;
     }
     for (const auto& item : _items) {
-        std::cout << "- " << item->getName() << item->getDescription() << std::endl;
+        std::cout << "- " << item->getName() << ": " << item->getDescription() << std::endl;
     }
 }
 
@@ -21,7 +23,6 @@ void Room::addToInventory(Item* item) {
 int Room::playerChoice(int min, int max) {
     int choice;
     do {
-        std::cout << "Enter your choice (" << min << "-" << max << "): ";
         std::cin >> choice;
     } while (choice < min || choice > max);
     return choice;
@@ -32,7 +33,8 @@ void Room::unlockExit() {
 }
 
 // Cell class implementations
-Cell::Cell(const std::string& description, int lockKey) : Room(description), _lockKey(lockKey) {}
+Cell::Cell(const std::string& description, int lockKey, bool canExit, bool lose)
+    : Room(description, canExit, lose), _lockKey(lockKey) {}
 
 void Cell::roomDescription() const {
     std::cout << _description << std::endl;
@@ -40,11 +42,11 @@ void Cell::roomDescription() const {
 
 void Cell::showPlayerOptions() {
     std::cout << "Make your choice to explore:" << std::endl;
-    std::cout << "1. Show inventory-" << std::endl;
-    std::cout << "2. Inspect Rock on ground:" << std::endl;
+    std::cout << "1. Show inventory" << std::endl;
+    std::cout << "2. Inspect rock on ground" << std::endl;
     std::cout << "3. Talk to old man sitting in the corner" << std::endl;
     std::cout << "4. Check clock" << std::endl;
-    std::cout << "5. Attempt to unlock lock on door- " << std::endl;
+    std::cout << "5. Attempt to unlock lock on door" << std::endl;
 }
 
 void Cell::actions() {
@@ -54,13 +56,13 @@ void Cell::actions() {
             showInventory();
             break;
         case 2:
-            std::cout << "The rock appears to be stuck to the ground, you notice the numbers 123 scratched in" << std::endl;
+            std::cout << "The rock appears to be stuck to the ground, you notice the numbers 123 scratched in." << std::endl;
             break;
         case 3:
-            std::cout << "The old man stares blankly at you" << std::endl;
+            std::cout << "The old man stares blankly at you." << std::endl;
             break;
         case 4:
-            std::cout << "The clock appears to have froze on 4am" << std::endl;
+            std::cout << "The clock appears to have frozen at 4am." << std::endl;
             break;
         case 5:
             int attempt;
@@ -76,19 +78,20 @@ void Cell::actions() {
     }
 }
 
-//Hallway class implementations
-Hallway::Hallway(const std::string& description, std::string passPhrase) : Room(description), _passPhrase(passPhrase) {}
+// Hallway class implementations
+Hallway::Hallway(const std::string& description, const std::string& passPhrase, bool canExit, bool lose)
+    : Room(description, canExit, lose), _passPhrase(passPhrase) {}
 
 void Hallway::roomDescription() const {
     std::cout << _description << std::endl;
 }
 
 void Hallway::showPlayerOptions() {
-    std::cout << "Choose what you want to do: " << std::endl;
-    std::cout << "1. Show Inventory: " << std::endl;
-    std::cout << "2. Check words scratched on wall: " << std::endl;
-    std::cout << "3. Check stone on ground: " << std::endl;
-    std::cout << "4. Talk to rat in the corner: " << std::endl;
+    std::cout << "Choose what you want to do:" << std::endl;
+    std::cout << "1. Show inventory" << std::endl;
+    std::cout << "2. Check words scratched on wall" << std::endl;
+    std::cout << "3. Check stone on ground" << std::endl;
+    std::cout << "4. Talk to rat in the corner" << std::endl;
     std::cout << "5. Try guessing password" << std::endl;
 }
 
@@ -99,47 +102,46 @@ void Hallway::actions() {
             showInventory();
             break;
         case 2:
-            std::cout << "You see scratched into the wall \"phrase\" " << std::endl;
+            std::cout << "You see scratched into the wall: \"phrase\"" << std::endl;
             break;
         case 3:
-            std::cout << "You see a small note under the rock that says: \"note\" " << std::endl;
+            std::cout << "You see a small note under the rock that says: \"note\"" << std::endl;
             break;
         case 4:
-            std::cout << "The rat stares at you and moves his tail a bit, why am I talking to a rat you think to yourself " << std::endl;
+            std::cout << "The rat stares at you and moves its tail a bit. Why am I talking to a rat?" << std::endl;
             break;
         case 5:
             std::string attempt;
-            std::cout << "Choose the passphrase to whisper in speaker";
+            std::cout << "Choose the passphrase to whisper in the speaker: ";
             std::cin >> attempt;
             if (attempt == _passPhrase) {
                 unlockExit();
                 std::cout << "The light flashes green and the door unlocks!" << std::endl;
-            } 
-            else if(_numGuesses >= 3) {
-                std::cout << "An alarm starts flashing above your head and you hear the sound of guards coming to get you.." << std::endl;
+            } else if (_numGuesses >= 3) {
+                std::cout << "An alarm starts flashing above your head and you hear the sound of guards coming to get you..." << std::endl;
                 lose = true;
-            }else {
-                std::cout << "The light flashes red a few times....it didn't appear to set off any alarms" << std::endl;
+            } else {
+                std::cout << "The light flashes red a few times... it didn't appear to set off any alarms." << std::endl;
                 _numGuesses++;
             }
             break;
     }
 }
 
-//Cave implementations
-
-Cave::Cave(const std::string& description) : Room(description) {}
+// Cave class implementations
+Cave::Cave(const std::string& description, bool canExit, bool lose)
+    : Room(description, canExit, lose) {}
 
 void Cave::roomDescription() const {
     std::cout << _description << std::endl;
 }
 
 void Cave::showPlayerOptions() {
-    std::cout << "Choose what to do in cave: " << std::endl;
-    std::cout << "1.Show inventory: " << std::endl;
-    std::cout << "2.Go in the pool of water: " << std::endl;
-    std::cout << "3.Walk down dark path: " << std::endl;
-    std::cout << "4.Feel along wall" << std::endl;
+    std::cout << "Choose what to do in the cave:" << std::endl;
+    std::cout << "1. Show inventory" << std::endl;
+    std::cout << "2. Go in the pool of water" << std::endl;
+    std::cout << "3. Walk down dark path" << std::endl;
+    std::cout << "4. Feel along wall" << std::endl;
 }
 
 void Cave::actions() {
@@ -149,23 +151,23 @@ void Cave::actions() {
             showInventory();
             break;
         case 2:
-            std::cout << "You go to search if there's anything in the water and all the sudden you are trapped... " << std::endl;
+            std::cout << "You go to search if there's anything in the water and all of a sudden you are trapped..." << std::endl;
             lose = true;
             break;
         case 3:
-            if(_items.empty()) {
-            std::cout << "You walk down the path and notice something shiny on the ground... it's a key!" << std::endl;
-            addToInventory(_key);
-            std::cout << "Key added to inventory" << std::endl;
+            if (_items.empty()) {
+                std::cout << "You walk down the path and notice something shiny on the ground... it's a key!" << std::endl;
+                addToInventory(_key);
+                std::cout << "Key added to inventory." << std::endl;
             } else {
                 std::cout << "You walk down the path again... there doesn't appear to be anything else here." << std::endl;
             }
             break;
         case 4:
             if (_items.empty()) {
-                std::cout << "You notice a keyhole on the wall, this could be your way out" << std::endl;
+                std::cout << "You notice a keyhole on the wall; this could be your way out." << std::endl;
             } else {
-                std::cout << "You used your key on the wall and small door opened!" << std::endl;
+                std::cout << "You used your key on the wall and a small door opened!" << std::endl;
                 unlockExit();
             }
             break;
@@ -179,9 +181,9 @@ void Game::start() {
 }
 
 void Game::end() {
-    if(_hasWon == true) {
+    if (_hasWon) {
         std::cout << "You escaped to freedom!" << std::endl;
-    }else {
+    } else {
         std::cout << "You failed to escape!" << std::endl;
     }
 }
@@ -206,9 +208,9 @@ void RunRoom::start() {
     current = head;
     while (current) {
         move();
-        if (lose == true) break;
+        if (lose) break;
         if (current->room->_canExit) {
-            if(!current->next) {
+            if (!current->next) {
                 _hasWon = true;
                 break;
             }
