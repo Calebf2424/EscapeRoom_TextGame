@@ -132,7 +132,9 @@ void Hallway::actions() {
 
 // Cave class implementations
 Cave::Cave(const std::string& description, bool canExit, bool lose)
-    : Room(description, canExit, lose) {}
+    : Room(description, canExit, lose) {
+        _key = new Item("Key", "A shiny silver key.");
+    }
 
 void Cave::roomDescription() const {
     std::cout << _description << std::endl;
