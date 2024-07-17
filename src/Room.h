@@ -12,8 +12,10 @@
 
 class Room {
 public:
-    Room(const std::string& description, bool canExit = false, bool lose = false);
-    virtual ~Room();
+    Room(const std::string& description, bool canExit = false, bool lose = false)
+        : _description(description), _canExit(canExit), lose(lose) {}
+
+    virtual ~Room() {}
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
     virtual void actions() = 0;
@@ -21,20 +23,21 @@ public:
     void addToInventory(Item* item);
     int playerChoice(int min, int max);
     void unlockExit();
-    bool _canExit;
-    bool lose;
-
+    
 protected:
     std::string _description;
     std::vector<Item*> _items;
     int _choice;
-    
+    bool _canExit;
+    bool lose;
 };
 
 //first stage
 class Cell : public Room {
 public:
-    Cell(const std::string& description, int lockKey);
+    Cell(const std::string& description, int lockKey, bool canExit = false, bool lose = false)
+        : Room(description, canExit, lose), _lockKey(lockKey) {}
+
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
@@ -45,28 +48,35 @@ private:
 
 //second stage
 class Hallway : public Room {
- public:
-    Hallway(const std::string& description, std::string passPhrase);
+public:
+    Hallway(const std::string& description, const std::string& passPhrase, bool canExit = false, bool lose = false)
+        : Room(description, canExit, lose), _passPhrase(passPhrase) {}
+
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
 
- private:
+private:
     std::string _passPhrase;
     int _numGuesses = 0;
 };
 
+
 //third stage
 
 class Cave : public Room {
- public:
-    Cave(const std::string& description);
+public:
+    Cave(const std::string& description, bool canExit = false, bool lose = false)
+        : Room(description, canExit, lose) {}
+
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
- private:
-  Item* _key;
+
+private:
+    Item* _key;
 };
+
 
 
 class Game {
