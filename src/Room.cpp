@@ -79,6 +79,10 @@ void Cell::actions() {
     }
 }
 
+Cave::~Cave() {
+    delete _key;
+}
+
 // Hallway class implementations
 Hallway::Hallway(const std::string& description, const std::string& passPhrase, bool canExit, bool lose)
     : Room(description, canExit, lose), _passPhrase(passPhrase) {}
