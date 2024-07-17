@@ -130,23 +130,22 @@ void Hallway::actions() {
 
 //Cave implementations
 
-Cave::Cave(const std::string& description) : Room(description) {}
+Cave::Cave(const std::string& description, Item* _key) : Room(description), _key(key) {}
 
 void Cave::roomDescription() const {
     std::cout << _description << std::endl;
 }
 
 void Cave::showPlayerOptions() {
-    std::cout << "desc" << std::endl;
-    std::cout << "1." << std::endl;
-    std::cout << "2." << std::endl;
-    std::cout << "3." << std::endl;
-    std::cout << "4." << std::endl;
-    std::cout << "5." << std::endl;
+    std::cout << "Choose what to do in cave: " << std::endl;
+    std::cout << "1.Show inventory: " << std::endl;
+    std::cout << "2.Jump in the pool: " << std::endl;
+    std::cout << "3.Walk down dark path: " << std::endl;
+    std::cout << "4.Feel along wall" << std::endl;
 }
 
 void Cave::actions() {
-    int choice = playerChoice(1, 5);
+    int choice = playerChoice(1, 4);
     switch (choice) {
         case 1:
             showInventory();
@@ -155,14 +154,21 @@ void Cave::actions() {
             std::cout << " " << std::endl;
             break;
         case 3:
-            std::cout << " " << std::endl;
-            break;
-        case 4:
-            std::cout << " " << std::endl;
+            if(_items.empty()) {
+            std::cout << "You walk down the path and notice something shiny on the ground... it's a key!" << std::endl;
+            addToInventory(_key);
+            std::cout << "Key added to inventory" << std::endl;
+            } else {
+                std::cout << "You walk down the path again... there doesn't appear to be anything else here." << std::endl;
+            }
             break;
         case 5:
-            //checks if player has found the key and lets out if yes otherwise doesn't
-            
+            if (_items.empty()) {
+                std::cout << "You notice a keyhole on the wall, this could be your way out" << std::endl;
+            } else {
+                std::cout << "You used your key on the wall and small door opened!" << std::endl;
+                unlockExit();
+            }
             break;
     }
 }
