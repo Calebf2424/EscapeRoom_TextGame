@@ -209,8 +209,8 @@ void RunRoom::start() {
     current = head;
     while (current) {
         move();
-        if (current->room->lose) break; // Access lose variable correctly
-        if (current->room->_canExit) {  // Access _canExit through the room pointer
+        if (current->room->hasLost()) break; // Use getter to access lose
+        if (current->room->canExit()) {  // Use getter to access _canExit
             if (!current->next) {
                 _hasWon = true;
                 break;
