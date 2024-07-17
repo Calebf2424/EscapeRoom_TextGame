@@ -2,20 +2,16 @@
 #define ROOM_H
 
 #include "Item.h"
-
 #include <vector>
 #include <iostream>
 #include <string>
-#include <iostream>
 #include <cctype>
 #include <algorithm>
 
 class Room {
 public:
-    Room(const std::string& description, bool canExit = false, bool lose = false)
-        : _description(description), _canExit(canExit), lose(lose) {}
-
-    virtual ~Room() {}
+    Room(const std::string& description, bool canExit = false, bool lose = false);
+    virtual ~Room();
     virtual void roomDescription() const = 0;
     virtual void showPlayerOptions() = 0;
     virtual void actions() = 0;
@@ -23,7 +19,9 @@ public:
     void addToInventory(Item* item);
     int playerChoice(int min, int max);
     void unlockExit();
-    
+    bool canExit() const { return _canExit; }
+    bool hasLost() const { return lose; }
+
 protected:
     std::string _description;
     std::vector<Item*> _items;
@@ -32,12 +30,9 @@ protected:
     bool lose;
 };
 
-//first stage
 class Cell : public Room {
 public:
-    Cell(const std::string& description, int lockKey, bool canExit = false, bool lose = false)
-        : Room(description, canExit, lose), _lockKey(lockKey) {}
-
+    Cell(const std::string& description, int lockKey, bool canExit = false, bool lose = false);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
@@ -46,12 +41,9 @@ private:
     int _lockKey;
 };
 
-//second stage
 class Hallway : public Room {
 public:
-    Hallway(const std::string& description, const std::string& passPhrase, bool canExit = false, bool lose = false)
-        : Room(description, canExit, lose), _passPhrase(passPhrase) {}
-
+    Hallway(const std::string& description, const std::string& passPhrase, bool canExit = false, bool lose = false);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
@@ -61,14 +53,9 @@ private:
     int _numGuesses = 0;
 };
 
-
-//third stage
-
 class Cave : public Room {
 public:
-    Cave(const std::string& description, bool canExit = false, bool lose = false)
-        : Room(description, canExit, lose) {}
-
+    Cave(const std::string& description, bool canExit = false, bool lose = false);
     void roomDescription() const override;
     void showPlayerOptions() override;
     void actions() override;
@@ -76,8 +63,6 @@ public:
 private:
     Item* _key;
 };
-
-
 
 class Game {
 public:
