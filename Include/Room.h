@@ -6,7 +6,9 @@
 #include <iostream>
 #include <string>
 #include <cctype>
-#include <algorithm>
+#include <cstdlib>
+
+void clearScreen();
 
 class Room {
 public:
