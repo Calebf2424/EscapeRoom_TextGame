@@ -230,6 +230,7 @@ void RunRoom::start() {
 
 void RunRoom::move() {
     if (current) {
+        current->room->roomDescription();
         current->room->showPlayerOptions();
         current->room->actions();
     }
