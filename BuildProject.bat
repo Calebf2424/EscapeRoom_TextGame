@@ -22,7 +22,7 @@ cd "%filepath%" || (
 cd build
 
 :: Run CMake commands
-cmake ..
+cmake .
 cmake --build .
 
 pause
