@@ -18,5 +18,7 @@ cd build
 cmake ..
 cmake --build .
 
+./EscapeRoom_TextGame
+
 pause
 
