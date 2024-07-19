@@ -253,5 +253,8 @@ void RunRoom::move() {
         current->room->roomDescription();
         current->room->showPlayerOptions();
         current->room->actions();
+        std::cout << "Press Enter to continue..." << std::endl;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        std::cin.get();
     }
 }
