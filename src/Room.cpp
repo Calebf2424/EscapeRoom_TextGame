@@ -36,11 +36,20 @@ void Room::addToInventory(Item* item) {
 
 int Room::playerChoice(int min, int max) {
     int choice;
-    do {
+    while (true) {
         std::cout << "Enter your choice (" << min << "-" << max << "): ";
         std::cin >> choice;
-    } while (choice < min || choice > max);
-    return choice;
+
+        // Check if input is a number and within range
+        if (std::cin.fail() || choice < min || choice > max) {
+            std::cin.clear(); // Clear the error state
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+            std::cout << "Invalid input. Please enter a number between " << min << " and " << max << "." << std::endl;
+        } else {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore any extra input
+            return choice;
+        }
+    }
 }
 
 void Room::unlockExit() {
