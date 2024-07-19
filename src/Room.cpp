@@ -258,12 +258,15 @@ void RunRoom::start() {
 }
 
 void RunRoom::move() {
-    if (current) {
+   if (current) {
         current->room->roomDescription();
         current->room->showPlayerOptions();
         current->room->actions();
+        
         std::cout << "Press Enter to continue..." << std::endl;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        if (std::cin.rdbuf()->in_avail() > 0) {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
         std::cin.get();
     }
 }
