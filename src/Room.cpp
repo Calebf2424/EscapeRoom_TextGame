@@ -11,6 +11,15 @@ void clearScreen() {
     system("clear");
 #endif
 }
+
+//prompt for confirmation
+void enter() {
+    std::cout << "Press Enter to continue..." << std::endl;
+        if (std::cin.rdbuf()->in_avail() > 0) {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        std::cin.get();
+}
 // Room class implementations
 Room::Room(const std::string& description, bool canExit, bool lose)
     : _description(description), _canExit(canExit), lose(lose) {}
@@ -255,6 +264,7 @@ void RunRoom::start() {
         }
     }
     Game::end();
+    enter();
 }
 
 void RunRoom::move() {
@@ -262,11 +272,6 @@ void RunRoom::move() {
         current->room->roomDescription();
         current->room->showPlayerOptions();
         current->room->actions();
-        
-        std::cout << "Press Enter to continue..." << std::endl;
-        if (std::cin.rdbuf()->in_avail() > 0) {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        std::cin.get();
-    }
+        enter();
+   }
 }
