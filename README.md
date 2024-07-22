@@ -16,4 +16,4 @@ This is a text-based escape room game implemented in C++. The game demonstrates 
 - **CMAKE**
 
 ## How to Run
-In the releases secction of page download and run EscapeRoom_TextGame.exe, You will likely have to hit trust then keep on the file.
+In the releases secction of page download and run EscapeRoom_TextGame.exe or EscapeRoom_TextGameCMAKE.exe if you have libraries installed. You will likely need to trust the file then keep to bypass security warning
