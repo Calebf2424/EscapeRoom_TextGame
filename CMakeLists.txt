@@ -8,6 +8,9 @@ project(EscapeRoom_TextGame CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Use static libraries
+set(BUILD_SHARED_LIBS OFF)
+
 # Include directories
 include_directories(Include)
 
@@ -19,4 +22,4 @@ add_executable(EscapeRoom_TextGame
 )
 
 # Optionally, set build type (Debug or Release)
-# set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Release)
