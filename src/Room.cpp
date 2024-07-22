@@ -60,7 +60,6 @@ int Room::playerChoice(int min, int max) {
 
 void Room::unlockExit() {
     _canExit = true;
-    enter();
 }
 
 // Cell class implementations
@@ -109,10 +108,6 @@ void Cell::actions() {
             break;
     }
     std::cout << "\n";
-}
-
-Cave::~Cave() {
-    delete _key;
 }
 
 // Hallway class implementations
@@ -174,6 +169,10 @@ Cave::Cave(const std::string& description, bool canExit, bool lose)
         _key = new Item("Key", "A shiny silver key.");
     }
 
+Cave::~Cave() {
+    delete _key;
+}
+
 void Cave::roomDescription() const {
     clearScreen();
     std::cout << _description << "\n";
@@ -216,6 +215,90 @@ void Cave::actions() {
             break;
     }
     std::cout << "\n";
+}
+
+//Highway class implementations
+Highway::Highway(const std::string& description, bool canExit, bool lose)
+    : Room(description, canExit, lose) {
+        _key = new Item("Key", "A set of truck keys");
+        _apple = new Item("Apple", "Seems like a regular apple");
+    }
+
+Highway::~Highway() {
+    delete _key;
+    delete _apple;
+}
+
+void Highway::roomDescription() const {
+    clearScreen();
+    std::cout << _description << "\n";
+}
+
+void Highway::showPlayerOptions() {
+    std::cout << "Choose what to do on the Highway:\n";
+    std::cout << "1. Show inventory\n";
+    std::cout << "2. There's a truck parked on the side...\n";
+    std::cout << "3. Shake the nearest tree\n";
+    std::cout << "4. Look along the ditch of the road\n";
+    std::cout << "5. Talk to man sitting at road\n";
+}
+
+void Highway::actions() {
+    int choice = playerChoice(1, 5);
+    switch (choice) {
+        case 1:
+            showInventory();
+            break;
+        case 2:
+            //option2
+            std::cout << "The truck appears to be empty..\n";
+            if (_items.size() == 2) {
+                unlockExit();
+                std::cout << "You put keys in ignition and the truck started\n";
+            }
+            break;
+        case 3:
+            //option3
+            if (countA == 1){
+                std::cout << "You knocked some apples off the tree!! \n";
+                addToInventory(_apple);
+                countA++;
+            }
+            else if (countA == 0) {
+                std::cout << "You shook the tree!... nothing happened though\n";
+                countA++;
+            } else {
+                std::cout << "There are no more apples on the tree!\n";
+            }
+            break;
+        case 4:
+            //option4
+            if (countS >= 1) {
+                std::cout << "You woke up the snake and he begins chasing you!\n";
+                lose = true;
+            }else {
+                std::cout << "You see a snake sleeping... it doesn't seem to want to be bothered\n";
+                countS++;
+            }
+            break;
+        case 5:
+            //option5
+            if (_items.size() == 1) {
+                addToInventory(_key);
+
+                std::cout << "Oh thank you so much for the apple. I found these lying around..\n";
+                std::cout << "The old man gave you truck keys!!\n";
+            } 
+            else if(_items.size() == 0) {
+                std::cout << "Man I'm so hungry... says the old man\n";
+            } else {
+                std::cout << "I already gave you the keys what else do you want...\n";
+                std::cout << "The old man starts fighting you and knocks you unconscious\n";
+                lose = true;
+            }
+            break;
+    }
+    std::cout << ".\n";
 }
 
 // Game class implementations
@@ -262,7 +345,7 @@ void RunRoom::start() {
         }
     }
     Game::end();
-    std::cout << "Press enter to exit\n"; 
+    std::cout << "Press enter to exit\n";
     enter();
 }
 

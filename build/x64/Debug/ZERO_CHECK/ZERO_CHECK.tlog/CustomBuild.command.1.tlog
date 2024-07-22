@@ -1,0 +1,10 @@
+^C:\USERS\CFARN\ESCAPEROOM_TEXTGAME\BUILD\CMAKEFILES\BECB15A159E14F5233F72E447A9F679D\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cfarn/EscapeRoom_TextGame -BC:/Users/cfarn/EscapeRoom_TextGame/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/cfarn/EscapeRoom_TextGame/build/EscapeRoom_TextGame.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

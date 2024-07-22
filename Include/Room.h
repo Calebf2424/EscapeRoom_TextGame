@@ -68,6 +68,22 @@ private:
     Item* _key;
 };
 
+//
+class Highway : public Room {
+public:
+    Highway(const std::string& description, bool canExit = false, bool lose = false);
+    ~Highway();
+    void roomDescription() const override;
+    void showPlayerOptions() override;
+    void actions() override;
+
+private:
+    Item* _key;
+    Item* _apple;
+    int countA = 0;
+    int countS = 0;
+};
+
 class Game {
 public:
     virtual void start();
