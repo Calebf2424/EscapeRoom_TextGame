@@ -58,6 +58,40 @@ int Room::playerChoice(int min, int max) {
     }
 }
 
+// This function takes in an input string, converts it to lowercase, removes leading and trailing whitespace, and then returns the result.
+std::string Room::interpretPassphrase(std::string& s) {
+    std::string sInterp = s;
+
+    // STEP 1 - Convert all characters in the string to lowercase.
+    for (char& c : sInterp) {
+        c = std::tolower(c);
+    }
+
+    // STEP 2 - Trim leading and trailing whitespace.
+    int firstIndex = -1; // set firstIndex to -1 for loop conditions to function as intended
+    int lastIndex = s.length() - 1;
+
+    for (int i = 0; i <= s.length() - 1; i++) {
+        if (!isspace(sInterp[i])) {
+            if (firstIndex < 0) { // if firstIndex has not been found...
+                firstIndex = i; // set first non-space character.
+            }
+            else { // if firstIndex is already found...
+                lastIndex = i; // then for each iteration, lastIndex must be the latest non-space character, until looping ends.
+            }
+        }
+    }
+
+    if (firstIndex < 0 || firstIndex >= lastIndex) { // check for input that was too short, or otherwise insufficient
+        return "WRONG PASSPHRASE"; // NOTE: This assumes 'wrong passphrase' will never be an acceptable passphrase to complete a room in the game!
+    }
+    else {
+        // return a substring of the input string, positioned at the first non-space character,
+        // and ending at the last non-space character.
+        return sInterp.substr(firstIndex, lastIndex + (1 - firstIndex));
+    }
+}
+
 void Room::unlockExit() {
     _canExit = true;
 }
@@ -146,10 +180,10 @@ void Hallway::actions() {
             break;
         case 5:
             std::string attempt;
-            std::cout << "Choose the passphrase to whisper in the speaker: (type all leters in lower case and ensure no extra spaces) "; //will add function to do this later, toLower, ignore extra spaces by using 2 pointer
+            std::cout << "Choose the passphrase to whisper in the speaker: ";
             std::cin >> attempt;
 
-            if (attempt == _passPhrase) {
+            if (interpretPassphrase(attempt) == _passPhrase) { // format input before evaluating passPhrase
                 std::cout << "The light flashes green and the door unlocks!\n";
                 unlockExit();
                 std::cin.get(); //needed because player hits enter on guess
