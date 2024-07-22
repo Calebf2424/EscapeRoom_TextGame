@@ -14,7 +14,6 @@ This is a text-based escape room game implemented in C++. The game demonstrates 
 - **Object-Oriented Programming (OOP)**
 - **Polymorphism**
 - **CMAKE**
-- **Batch Files**
 
 ## How to Run
-1.In the releases secction of page download and run EscapeRoom_TextGame.exe
+In the releases secction of page download and run EscapeRoom_TextGame.exe, You will likely have to hit trust then keep on the file.
