@@ -102,6 +102,7 @@ void Cell::actions() {
             if (attempt == _lockKey) {
                 std::cout << "The door unlocked!\n";
                 unlockExit();
+                std::cin.get(); //needed because player hits enter on their guess
             } else {
                 std::cout << "Incorrect key!\n";
             }
@@ -151,6 +152,7 @@ void Hallway::actions() {
             if (attempt == _passPhrase) {
                 std::cout << "The light flashes green and the door unlocks!\n";
                 unlockExit();
+                std::cin.get(); //needed because player hits enter on guess
             } else if (_numGuesses >= 3) {
                 std::cout << "An alarm starts flashing above your head and you hear the sound of guards coming to get you...\n";
                 lose = true;
