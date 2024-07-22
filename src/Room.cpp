@@ -100,8 +100,8 @@ void Cell::actions() {
             std::cout << "Enter the key to unlock: ";
             std::cin >> attempt;
             if (attempt == _lockKey) {
+                std::cout << "The door unlocked!\n";
                 unlockExit();
-                std::cout << "Unlocked!\n";
             } else {
                 std::cout << "Incorrect key!\n";
             }
@@ -149,8 +149,8 @@ void Hallway::actions() {
             std::cin >> attempt;
 
             if (attempt == _passPhrase) {
-                unlockExit();
                 std::cout << "The light flashes green and the door unlocks!\n";
+                unlockExit();
             } else if (_numGuesses >= 3) {
                 std::cout << "An alarm starts flashing above your head and you hear the sound of guards coming to get you...\n";
                 lose = true;
