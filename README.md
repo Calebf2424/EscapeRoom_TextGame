@@ -4,8 +4,8 @@
 This is a text-based escape room game implemented in C++. The game demonstrates the use of object-oriented programming (OOP) principles and polymorphism. Players navigate through different rooms, each with unique descriptions and actions, to ultimately escape.
 
 ## Features
-- **Rooms**: Each room (`Cell`, `Hallway`, `Cave`) has its own description and set of actions.
-- **Inventory Management**: Players can collect and inspect items (minimal use now but will add to in future).
+- **Rooms**: Each room (`Cell`, `Hallway`, `Cave`, `Highway`) have their own descriptions and set of actions.
+- **Inventory Management**: Players can collect and inspect items that are required to help them advance.
 - **Clues**: Players receive clues to help them progress through the game.
 - **Polymorphism**: The game uses virtual functions and overridden methods to implement room-specific behaviors.
 
