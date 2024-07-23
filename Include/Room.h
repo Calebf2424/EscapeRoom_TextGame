@@ -21,6 +21,7 @@ public:
     void showInventory();
     void addToInventory(Item* item);
     int playerChoice(int min, int max);
+    std::string interpretPassphrase(std::string&);
     void unlockExit();
     bool canExit() const { return _canExit; }
     bool hasLost() const { return lose; }
